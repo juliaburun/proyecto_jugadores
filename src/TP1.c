@@ -10,8 +10,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "Funciones.h"
-
+#include "Jugadores.h"
+#include "Costos.h"
 
 
 int main(void) {
@@ -30,6 +30,8 @@ int main(void) {
 	int mediocampistas = 0;
 	int delanteros = 0;
 	int opcion;
+	int opcion2;
+	int opcionMenuPrincipal;
 	int jugadoresUef = 0;
 	int jugadoresConme = 0;
 	int jugadoresConca = 0;
@@ -43,14 +45,14 @@ int main(void) {
 	float promedioOfc;
 	float promedioCaf;
 	int camiseta;
-	int flag1 = 0;
-	int flag2 = 0;
-	int flag3 = 0;
+	int flagCalculos = 0;
 
 
 	do
 	{
-		switch(menuPrincipal(costo1, costo2, costo3, arqueros, defensores, mediocampistas, delanteros))
+		menuPrincipal(costo1, costo2, costo3, arqueros, defensores, mediocampistas, delanteros);
+		scanf("%d", &opcionMenuPrincipal);
+		switch(opcionMenuPrincipal)
 		{
 			case 1:
 				do
@@ -101,22 +103,21 @@ int main(void) {
 
 					}
 
-					flag1 = 1;
-
 				}while(opcion != 4);
 
 				pausa();
+				limpiarConsola();
 				break;
 			case 2:
-				//if jugasdores < 2
+
 				do {
 					limpiarConsola();
 
 					subMenuJugadores(arqueros, defensores, mediocampistas, delanteros);
 
-					scanf("%d", &opcion);
+					scanf("%d", &opcion2);
 
-					switch(opcion)
+					switch(opcion2)
 					{
 						case 1:
 
@@ -153,27 +154,26 @@ int main(void) {
 							break;
 						case 5:
 							printf("\n Volviendo al menu principal\n");
-	//------------------	NOOO VUELVEEEEEEE------------------------------------------------
 							break;
-					};
+					}
 
-					if(opcion > 0 && opcion < 5)
+					if(opcion2 < 5)
 					{
 						jugadores++;
 					}
 
-				}while(opcion != 5 );
+				}while(opcion2 < 5 );
 
 				pausa();
-
-				flag2 = 1;
+				limpiarConsola();
 
 				break;
 
 			case 3:
-				if(jugadores == 22)
+				limpiarConsola();
+				if(jugadores > 0)
 				{
-					if(flag1 && flag2)
+					if(costo1 && costo2 && costo3)
 					{
 						promedio(&jugadoresUef, &jugadoresConme, &jugadoresConca, &jugadoresAfc, &jugadoresOfc, &jugadoresCaf, &promedioUef, &promedioConme, &promedioConca, &promedioAfc, &promedioOfc, &promedioCaf, &jugadores);
 
@@ -183,7 +183,7 @@ int main(void) {
 
 						pausa();
 
-						flag3 = 1;
+						flagCalculos = 1;
 
 					}
 					else
@@ -193,16 +193,16 @@ int main(void) {
 				}
 				else
 				{
-					printf("Termine de ingresar los 22 jugadores");
+					printf("Ingrese jugadores");
 				}
 
 
 				break;
 
 			case 4:
-				if(flag3)
+				if(flagCalculos)
 				{
-					printf("      Resultados\n  "
+					printf("      Resultados\n"
 						"Promedio Uefa %.2f \n"
 						"Promedio Conmebol %.2f \n"
 						"Promedio Concacaf %.2f \n"
@@ -212,7 +212,7 @@ int main(void) {
 						"El costo de mantenimiento era de %.2f",promedioUef, promedioConme, promedioConca, promedioAfc, promedioOfc, promedioCaf, suma);
 					if(aumento)
 					{
-						printf(" y recibió un aumento de  %.2f, su nuevo valor es de: %.2f .", aumento, sumaConAumento);
+						printf(" y recibió un aumento de  %.2f, su nuevo valor es de: %.2f. \n", aumento, sumaConAumento);
 					}
 					pausa();
 				}
@@ -227,16 +227,8 @@ int main(void) {
 				break;
 		}
 
+	}while(opcionMenuPrincipal != 5);
 
-
-
-
-
-
-	}while(opcion != 5);
-
-
-// dividir funciones en dos bibliotecas: costos y jugadores
 
 	return 0;
 }

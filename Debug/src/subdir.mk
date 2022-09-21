@@ -4,15 +4,18 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../src/Funciones.c \
+../src/Costos.c \
+../src/Jugadores.c \
 ../src/TP1.c 
 
 C_DEPS += \
-./src/Funciones.d \
+./src/Costos.d \
+./src/Jugadores.d \
 ./src/TP1.d 
 
 OBJS += \
-./src/Funciones.o \
+./src/Costos.o \
+./src/Jugadores.o \
 ./src/TP1.o 
 
 
@@ -28,7 +31,7 @@ src/%.o: ../src/%.c src/subdir.mk
 clean: clean-src
 
 clean-src:
-	-$(RM) ./src/Funciones.d ./src/Funciones.o ./src/TP1.d ./src/TP1.o
+	-$(RM) ./src/Costos.d ./src/Costos.o ./src/Jugadores.d ./src/Jugadores.o ./src/TP1.d ./src/TP1.o
 
 .PHONY: clean-src
 
